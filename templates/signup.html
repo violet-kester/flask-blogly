@@ -1,0 +1,14 @@
+{% extends base.html %} {% block content %}
+<form action="/signup" method="post">
+  <label for ="first-name">First name: </label>
+  <input name="first-name" id="first-name" required/>
+
+  <label for = "last-name" >Last name: </label>
+  <input name="last-name" id = "last-name"/>
+
+  <label for ="img-url"> Image URL:</label>
+  <input name="img-url" id = "img-url"/>
+  <input type="submit" value="Add" class="btn btn-primary">
+</form>
+
+{% endblock %}

@@ -29,7 +29,7 @@ class User(db.Model):
         db.String(50),
         nullable=True)
 
-    image_url = db.Column(
+    img_url = db.Column(
         db.String(150),
         nullable=True)
 

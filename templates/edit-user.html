@@ -1,0 +1,16 @@
+{% extends base.html %} {% block content %}
+<form action="/signup" method="post">
+  <label for ="first-name">New first name: </label>
+  <input name="first-name" id="first-name"/>
+
+  <label for = "last-name" >New last name: </label>
+  <input name="last-name" id = "last-name"/>
+
+  <label for ="img-url">New image url: </label>
+  <input name="img-url" id = "img-url"/>
+
+  <button action="/users/{{ user.id }}/edit">Cancel</button>
+  <input type="submit" value="Save" class="btn btn-primary">
+</form>
+
+{% endblock %}
