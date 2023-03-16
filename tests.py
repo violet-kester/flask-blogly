@@ -42,7 +42,6 @@ class UserViewTestCase(TestCase):
 
         db.session.add(test_user)
         db.session.commit()
-
         # We can hold onto our test_user's id by attaching it to self (which is
         # accessible throughout this test class). This way, we'll be able to
         # rely on this user in our tests without needing to know the numeric
@@ -60,3 +59,5 @@ class UserViewTestCase(TestCase):
             html = resp.get_data(as_text=True)
             self.assertIn("test1_first", html)
             self.assertIn("test1_last", html)
+
+
