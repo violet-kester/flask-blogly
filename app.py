@@ -79,7 +79,7 @@ def show_users():
 
 @app.get("/users/<int:user_id>/edit")
 def show_edit_user(user_id):
-
+    """Shows edit user page"""
     user = User.query.get_or_404(user_id)
 
     return render_template("edit-user.html", user=user)
@@ -87,24 +87,22 @@ def show_edit_user(user_id):
 
 @app.post("/users/<int:user_id>/edit")
 def edit_user(user_id):
+    """gets edit form data and updates user"""
+    user = User.query.get(user_id)
 
-    user = User.query.filter_by(id = user_id)
+    new_first_name = request.form.get("first-name")
+    if new_first_name:
+        user.first_name = new_first_name
 
-    first_name = request.form.get("first-name")
-    if first_name:
-        user.first_name = first_name
+    new_last_name = request.form.get("last-name")
+    if new_last_name:
+        user.last_name = new_last_name
 
-    last_name = request.form.get("last-name")
-    if last_name:
-        user.last_name = last_name
-
-    img_url = request.form.get("img-url")
-    if img_url:
-        user.img_url = img_url
+    new_img_url = request.form.get("img-url")
+    if new_img_url:
+        user.img_url = new_img_url
 
     # update user info
-    user = User(first_name=first_name, last_name=last_name, img_url=img_url)
-    db.session.add(user)
     db.session.commit()
 
     return redirect('/users')

@@ -3,13 +3,13 @@
 {% block content %}
 <form action="/users/new" method="post">
   <label for ="first-name">First name: </label>
-  <input name="first-name" id="first-name" required/>
+  <input name="first-name" id="first-name" required placeholder="Enter a first name"/>
 
   <label for = "last-name" >Last name: </label>
-  <input name="last-name" id = "last-name"/>
+  <input name="last-name" id = "last-name"placeholder="Enter a last name."/>
 
   <label for ="img-url"> Image URL:</label>
-  <input name="img-url" id = "img-url"/>
+  <input name="img-url" id = "img-url" placeholder="Provide an image URL for this user."/>
   <input type="submit" value="Add" class="btn btn-primary">
 </form>
 
