@@ -60,4 +60,62 @@ class UserViewTestCase(TestCase):
             self.assertIn("test1_first", html)
             self.assertIn("test1_last", html)
 
+    def test_homepage(self):
+        """Test if homepage redirects to /users"""
 
+        with self.client as client:
+            response = client.get('/')
+
+            # successfully redirects to /users
+            self.assertEqual(response.status_code, 302)
+            self.assertEqual(response.location,'/users')
+
+    def test_show_edit_user(self):
+        """Test that edit form is shown on button click"""
+
+        # test get request
+        with self.client as client:
+            response = client.get(f'/users/{self.user_id}/edit')
+            html = response.get_data(as_text=True)
+
+            # successfully redirects to /users
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('<!-- Test: this is the edit user form -->', html)
+
+    def test_edit_user(self):
+        """Test that edit form is shown on button click"""
+
+        # test get request
+        with self.client as client:
+            response = client.post(f'/users/{self.user_id}/edit')
+
+            # TODO: test to see if info is successfully updated
+
+            # successfully redirects to /users
+            self.assertEqual(response.status_code, 302)
+            self.assertEqual(response.location,'/users')
+
+    def test_show_user(self):
+        """Test that user info is shown on button click"""
+
+        # test get request
+        with self.client as client:
+            response = client.get(f'/users/{self.user_id}')
+            html = response.get_data(as_text=True)
+
+            # successfully redirects to /users
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('<!-- Test: this is the user page -->', html)
+
+
+    def test_confirm_delete(self):
+        """Test that delete confirmation page is shown on button click"""
+
+        # test get request
+        with self.client as client:
+            response = client.get(f'/users/{self.user_id}/delete')
+            html = response.get_data(as_text=True)
+
+            # successfully redirects to /users
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('<!-- Test: this is the delete confirmation page -->', html)

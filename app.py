@@ -49,10 +49,10 @@ def signup():
     last_name = request.form.get("last-name")
     last_name = last_name if last_name else None
 
-    img_url = request.form.get("img-url")
-    img_url = img_url if img_url else None
+    image_url = request.form.get("img-url")
+    image_url = image_url if image_url else None
 
-    user = User(first_name=first_name, last_name=last_name, img_url=img_url)
+    user = User(first_name=first_name, last_name=last_name, image_url=image_url)
     db.session.add(user)
     db.session.commit()
 
@@ -98,9 +98,9 @@ def edit_user(user_id):
     if new_last_name:
         user.last_name = new_last_name
 
-    new_img_url = request.form.get("img-url")
-    if new_img_url:
-        user.img_url = new_img_url
+    new_image_url = request.form.get("image-url")
+    if new_image_url:
+        user.image_url = new_image_url
 
     # update user info
     db.session.commit()

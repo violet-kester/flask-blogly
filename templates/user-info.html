@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
 {%block content %}
+<!-- Test: this is the user page -->
 
 <h1>Hi {{ user.first_name }} {{ user.last_name}}!</h1>
 
-<img src="{{ user.img_url }}" />
+<img src="{{ user.image_url }}" />
 
 <button onclick="location.href='/users/{{ user.id }}/edit'" class="btn btn-primary">Edit</button>
 

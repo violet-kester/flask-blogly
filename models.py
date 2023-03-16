@@ -1,5 +1,6 @@
 """Models for Blogly."""
 
+DEFAULT_IMAGE_URL = 'https://post.healthline.com/wp-content/uploads/2020/08/coconut-nutrition-correct-732x549-thumbnail-732x549.jpg'
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
@@ -29,7 +30,7 @@ class User(db.Model):
         db.String(50),
         nullable=True)
 
-    img_url = db.Column(
+    image_url = db.Column(
         db.String(150),
         nullable=True)
 

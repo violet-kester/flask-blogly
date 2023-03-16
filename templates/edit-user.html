@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!-- Test: this is the edit user form -->
 
 <form action="/users/{{ user.id }}/edit" method="post">
   <label for ="first-name">New first name: </label>
@@ -9,8 +10,8 @@
   <label for = "last-name" >New last name: </label>
   <input name="last-name" id = "last-name" placeholder="{{ user.last_name }}"/>
 
-  <label for ="img-url">New image url: </label>
-  <input name="img-url" id = "img-url" placeholder="{{ user.img_url }}"/>
+  <label for ="image-url">New image url: </label>
+  <input name="image-url" id = "image-url" placeholder="{{ user.image_url }}"/>
 
   <button action="/" class="btn btn-secondary">Cancel</button>
   <input type="submit" value="Save" class="btn btn-success">
