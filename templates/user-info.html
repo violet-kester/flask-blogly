@@ -4,11 +4,17 @@
 <!-- Test: this is the user page -->
 
 <h1>Hi {{ user.first_name }} {{ user.last_name}}!</h1>
-
+{% if user.image_url %}
 <img src="{{ user.image_url }}" />
-
+{% endif %}
 <button onclick="location.href='/users/{{ user.id }}/edit'" class="btn btn-primary">Edit</button>
 
 <button onclick="location.href='/users/{{ user.id }}/delete'" class="btn btn-danger">Delete</button>
+
+<!--if user has posts
+for post of user's posts...
+
+
+-->
 
 {% endblock %}

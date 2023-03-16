@@ -1,16 +1,30 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<form action="/users/new" method="post" class="form">
+  <label for="first-name">First name: </label>
+  <input
+    name="first-name"
+    id="first-name"
+    required
+    placeholder="Enter a first name"
+    class="form-control"
+  />
 
-{% block content %}
-<form action="/users/new" method="post">
-  <label for ="first-name">First name: </label>
-  <input name="first-name" id="first-name" required placeholder="Enter a first name"/>
+  <label for="last-name">Last name: </label>
+  <input
+    name="last-name"
+    id="last-name"
+    placeholder="Enter a last name."
+    class="form-control"
+  />
 
-  <label for = "last-name" >Last name: </label>
-  <input name="last-name" id = "last-name"placeholder="Enter a last name."/>
-
-  <label for ="image-url"> Image URL:</label>
-  <input name="image-url" id = "image-url" placeholder="Provide an image URL for this user."/>
-  <input type="submit" value="Add" class="btn btn-primary">
+  <label for="image-url"> Image URL:</label>
+  <input
+    name="image-url"
+    id="image-url"
+    placeholder="Provide an image URL for this user."
+    class="form-control"
+  />
+  <input type="submit" value="Add" class="btn btn-primary" />
 </form>
 
 {% endblock %}

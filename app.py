@@ -21,7 +21,7 @@ debug = DebugToolbarExtension(app)
 db.drop_all()
 db.create_all()
 
-
+#docstrings for homepage, show_form
 @app.get('/')
 def homepage():
 
@@ -42,14 +42,13 @@ def show_form():
 @app.post('/users/new')
 def signup():
     """Gets user signup form data"""
-    print('signup POST /users/new')
 
     first_name = request.form.get("first-name")
 
     last_name = request.form.get("last-name")
     last_name = last_name if last_name else None
 
-    image_url = request.form.get("img-url")
+    image_url = request.form["image-url"] or None #..., None)
     image_url = image_url if image_url else None
 
     user = User(first_name=first_name, last_name=last_name, image_url=image_url)
@@ -60,9 +59,9 @@ def signup():
 
 
 @app.get("/users/<int:user_id>")
-
 def show_user(user_id):
     """Shows user info"""
+
     user = User.query.get_or_404(user_id)
     return render_template("user-info.html", user=user)
 
@@ -71,7 +70,7 @@ def show_user(user_id):
 def show_users():
     """Shows all users"""
 
-    # users = User.query.get_or_404.all(user_id)
+    # users = User.query.get_or_404.all()
     users = User.query.all()
 
     return render_template("user-list.html", users=users)
@@ -88,17 +87,17 @@ def show_edit_user(user_id):
 @app.post("/users/<int:user_id>/edit")
 def edit_user(user_id):
     """gets edit form data and updates user"""
-    user = User.query.get(user_id)
+    user = User.query.get(user_id) #or_404
 
     new_first_name = request.form.get("first-name")
     if new_first_name:
         user.first_name = new_first_name
 
-    new_last_name = request.form.get("last-name")
+    new_last_name = request.form.get("last-name") #can't delete last name
     if new_last_name:
         user.last_name = new_last_name
 
-    new_image_url = request.form.get("image-url")
+    new_image_url = request.form.get("image-url") #can't delete without new photo
     if new_image_url:
         user.image_url = new_image_url
 
@@ -119,10 +118,7 @@ def confirm_delete(user_id):
 @app.post("/users/<int:user_id>/delete")
 def delete_user(user_id):
 
-    # add a flash msg?
-
-    # user = User.query.filter_by(id = user_id)
-    # user.query.delete()
+    # TODO: add a flash msg?
 
     User.query.filter_by(id = user_id).delete()
     db.session.commit()

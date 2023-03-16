@@ -63,7 +63,7 @@ class UserViewTestCase(TestCase):
     def test_homepage(self):
         """Test if homepage redirects to /users"""
 
-        with self.client as client:
+        with self.client as client: #keep consistent with "c" above
             response = client.get('/')
 
             # successfully redirects to /users
