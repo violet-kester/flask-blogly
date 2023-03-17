@@ -63,44 +63,54 @@ class UserViewTestCase(TestCase):
     def test_homepage(self):
         """Test if homepage redirects to /users"""
 
-        with self.client as client: #keep consistent with "c" above
-            response = client.get('/')
+        with self.client as c: #keep consistent with "c" above
+            response = c.get('/')
 
             # successfully redirects to /users
             self.assertEqual(response.status_code, 302)
             self.assertEqual(response.location,'/users')
 
+
     def test_show_edit_user(self):
         """Test that edit form is shown on button click"""
 
         # test get request
-        with self.client as client:
-            response = client.get(f'/users/{self.user_id}/edit')
+        with self.client as c:
+            response = c.get(f'/users/{self.user_id}/edit')
             html = response.get_data(as_text=True)
 
             # successfully redirects to /users
             self.assertEqual(response.status_code, 200)
             self.assertIn('<!-- Test: this is the edit user form -->', html)
 
+
     def test_edit_user(self):
-        """Test that edit form is shown on button click"""
+        """Tests that user details were successfully edited"""
 
-        # test get request
-        with self.client as client:
-            response = client.post(f'/users/{self.user_id}/edit')
-
-            # TODO: test to see if info is successfully updated
+        with self.client as c:
+            test_user = User.query.get(self.user_id)
+            test_user.last_name = "Coconato"
+            db.session.commit()
+            response = c.post(f'/users/{self.user_id}/edit', follow_redirects=True)
+            html = response.get_data(as_text=True)
 
             # successfully redirects to /users
-            self.assertEqual(response.status_code, 302)
-            self.assertEqual(response.location,'/users')
+            self.assertEqual(response.status_code, 200)
+            # last name successfully updated
+            self.assertEqual(test_user.last_name, 'Coconato')
+            # new last name appears on users list page
+            self.assertIn('Coconato', html)
+
+            # TODO: How can we change the test_users sample data?
+            # AssertionError: 'Coconato' not found in '<!DOCTYPE html>...
+
 
     def test_show_user(self):
         """Test that user info is shown on button click"""
 
         # test get request
-        with self.client as client:
-            response = client.get(f'/users/{self.user_id}')
+        with self.client as c:
+            response = c.get(f'/users/{self.user_id}')
             html = response.get_data(as_text=True)
 
             # successfully redirects to /users
@@ -112,8 +122,8 @@ class UserViewTestCase(TestCase):
         """Test that delete confirmation page is shown on button click"""
 
         # test get request
-        with self.client as client:
-            response = client.get(f'/users/{self.user_id}/delete')
+        with self.client as c:
+            response = c.get(f'/users/{self.user_id}/delete')
             html = response.get_data(as_text=True)
 
             # successfully redirects to /users

@@ -3,9 +3,12 @@
 {% block content %}
 <!-- Test: this is the delete confirmation page -->
 
-<p>Are you sure?</p>
 <!--add user name (and guilt message!)-->
+<p>Are you sure {{ user.first_name }}?</p>
+<p>Are you really, really sure?</p>
+
 <form action="/users/{{ user.id }}/delete" method="POST">
   <button type="submit" class="btn btn-danger">Absolutely</button>
 </form>
+
 {% endblock %}

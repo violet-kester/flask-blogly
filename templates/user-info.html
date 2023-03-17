@@ -11,10 +11,16 @@
 
 <button onclick="location.href='/users/{{ user.id }}/delete'" class="btn btn-danger">Delete</button>
 
-<!--if user has posts
-for post of user's posts...
 
+<!-- BLOG POSTS -->
+<ul>
+  {% for post in user.posts %}
 
--->
+    <li><a href="/users/{{ user.id }}/posts/{{ post.id }}">{{ post.title }}</a></li>
+
+  {% endfor %}
+</ul>
+
+<button onclick="location.href='/users/{{ user.id }}/posts/new'" class="btn btn-primary">Add Post</button>
 
 {% endblock %}
