@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h1>{{ post.title }}</h1>
+<p>Created at: {{post.created_at}}</p>
+<p>{{ post.content }}</p>
+
+
+<button class="btn btn-danger" onclick=alert>Delete</button>
+<button class="btn btn-primary" onclick="location.href='(figureout user id backref)'">Back</button>
+<button class="btn btn-primary" onclick="location.href='posts/{{post.id}}/edit'">Edit</button>
+
 
 {% endblock %}
